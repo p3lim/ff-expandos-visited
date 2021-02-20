@@ -19,7 +19,7 @@ jobs:
           node-version: 14.x
 
       - name: Install web-ext
-        run: npm install -g web-ext
+        run: npm install -g web-ext@^5
 
       - name: Run tests
         run: web-ext lint

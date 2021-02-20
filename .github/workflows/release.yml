@@ -17,7 +17,7 @@ jobs:
           node-version: 14.x
 
       - name: Install web-ext
-        run: npm install -g web-ext
+        run: npm install -g web-ext@^5
 
       # https://extensionworkshop.com/documentation/develop/web-ext-command-reference/
       # ^ under "--channel" it notes that this will most likely fail, so we ignore the failures
