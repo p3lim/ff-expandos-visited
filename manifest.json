@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Expandos Visited",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"description": "Marks Reddit links opened by expando buttons as visited in the history.",
 	"permissions": ["history"],
 	"background": {
