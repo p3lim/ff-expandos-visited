@@ -11,12 +11,12 @@ jobs:
       - name: Lint
         uses: p3lim/web-ext-action@master
         with:
-          cmd: lint
+          action: lint
 
       - name: Build
         uses: p3lim/web-ext-action@master
         with:
-          cmd: build
+          action: build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -28,7 +28,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: p3lim/web-ext-action@master
         with:
-          cmd: sign
+          action: sign
           channel: listed
         env:
           AMO_API_KEY: ${{ secrets.AMO_API_KEY }}
