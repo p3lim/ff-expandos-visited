@@ -2,6 +2,8 @@
 
 Marks Reddit links opened by expando buttons as visited in the history.
 
+[Available on addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/expandos-visited)
+
 ### Building
 
 ```bash
