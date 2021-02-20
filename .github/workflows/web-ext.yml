@@ -14,6 +14,7 @@ jobs:
           action: lint
 
       - name: Build
+        id: build
         uses: p3lim/web-ext-action@master
         with:
           action: build
@@ -21,11 +22,12 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: My-Extension
-          path: web-ext-artifacts/*.zip
+          name: expandos-visited-artifact
+          path: ${{ steps.build.outputs.artifact }}
 
       - name: Sign
         if: startsWith(github.ref, 'refs/tags/')
+        id: sign
         uses: p3lim/web-ext-action@master
         with:
           action: sign
@@ -35,8 +37,9 @@ jobs:
           AMO_API_SECRET: ${{ secrets.AMO_API_SECRET }}
 
       - name: Release
+        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          files: 'web-ext-artifacts/*.xpi'
+          files: ${{ steps.sign.outputs.artifact }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
