@@ -1,4 +1,3 @@
-// this is wasteful, should probably learn how to use the observer properly
 let hooked = []
 
 const onClick = event => {
@@ -15,6 +14,7 @@ const load = _ => {
 	})
 }
 
+// this is wasteful, should probably learn how to use the observer properly
 const observer = new MutationObserver(load)
 observer.observe(document, {
 	childList: true,
