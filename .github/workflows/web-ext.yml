@@ -1,0 +1,42 @@
+name: Run web-ext action
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Lint
+        uses: p3lim/web-ext-action@master
+        with:
+          cmd: lint
+
+      - name: Build
+        uses: p3lim/web-ext-action@master
+        with:
+          cmd: build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: My-Extension
+          path: web-ext-artifacts/*.zip
+
+      - name: Sign
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: p3lim/web-ext-action@master
+        with:
+          cmd: sign
+          channel: listed
+        env:
+          AMO_API_KEY: ${{ secrets.AMO_API_KEY }}
+          AMO_API_SECRET: ${{ secrets.AMO_API_SECRET }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: 'web-ext-artifacts/*.xpi'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
