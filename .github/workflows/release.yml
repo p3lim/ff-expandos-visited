@@ -19,9 +19,15 @@ jobs:
       - name: Install web-ext
         run: npm install -g web-ext@^5
 
-      # https://extensionworkshop.com/documentation/develop/web-ext-command-reference/
-      # ^ under "--channel" it notes that this will most likely fail, so we ignore the failures
       - name: Sign extension
+        run: web-ext sign
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_API_SECRET }}
+
+      # https://extensionworkshop.com/documentation/develop/web-ext-command-reference/#web-ext-sign
+      # ^ under "--channel" it notes that this will most likely fail, so we'll ignore the failures
+      - name: Publish extension
         run: |
           web-ext sign --channel=listed
           exit 0
